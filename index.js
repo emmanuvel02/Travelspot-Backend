@@ -19,10 +19,17 @@ app.use(cors());
 app.use(express.json());
 app.use(passport.initialize());
 app.use(express.urlencoded({ extended: true }));
+// Replace your current CORS setup with this:
 app.use(cors({
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
+    origin: [
+        'http://localhost:3000', // For local development
+        'https://skyblumes.vercel.app'   
+    ],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    credentials: true // Include if you need to handle cookies/auth
 }));
+
+// Make sure to REMOVE the duplicate app.use(cors()) call
 
 mongoose.connect(process.env.DATABASE).then(() => {
     console.log('DB connected');
@@ -33,5 +40,5 @@ app.use('/admin', adminRoutes);
 
 const PORT = 3001;
 app.listen(PORT, () => {
-    console.log("Server running on port " + PORT);
+    console.log("Server running on port " + PORT);
 });

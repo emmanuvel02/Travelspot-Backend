@@ -282,8 +282,11 @@ const DestinationBooking = async (req, res) => {
           },
         ],
         mode: "payment",
-        success_url: "http://localhost:3000/bookingsuccessfull",
+        // success_url: "http://localhost:3000/bookingsuccessfull",
+        success_url: "https://skyblumes.vercel.app/bookingsuccessfull",
+
         cancel_url: "http://localhost:3000/cancelbooking",
+      
       });
 
       const bookingdata = new Booking({
